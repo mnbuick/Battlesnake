@@ -92,24 +92,23 @@ function move(gameState) {
 
   
   // Avoid head on collisions with other snakes
-  // EDIT for usability
   for(let i = 0; i < opponents.length; i++){
     let snake = opponents[i].body;
     let snakeHead = snake[0];
     if(snake.length >= myBody.length){
-      if((myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x  && myHead.y == snakeHead.y + 2)){
+      if((myHead.x - 1 == snakeHead.x && myHead.y+ 1 == snakeHead.y ) || (myHead.x+ 1 == snakeHead.x  && myHead.y+ 1 == snakeHead.y ) || (myHead.x == snakeHead.x  && myHead.y + 2 == snakeHead.y)){
         isMoveSafe.up = false;
         console.log("test1");
       }
-      if((myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x  && myHead.y == snakeHead.y - 2)){
+      if((myHead.x - 1 == snakeHead.x  && myHead.y- 1 == snakeHead.y ) || (myHead.x+ 1 == snakeHead.x  && myHead.y- 1 == snakeHead.y ) || (myHead.x == snakeHead.x  && myHead.y - 2 == snakeHead.y)){
         isMoveSafe.down = false;
         console.log("test2");
       }
-      if((myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x + 2  && myHead.y == snakeHead.y)){
+      if((myHead.x + 1 == snakeHead.x && myHead.y + 1 == snakeHead.y) || (myHead.x + 1 == snakeHead.x && myHead.y - 1 == snakeHead.y) || (myHead.x+ 2 == snakeHead.x   && myHead.y == snakeHead.y)){
         isMoveSafe.right = false;
         console.log("test3");
       }
-      if((myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x - 2  && myHead.y == snakeHead.y)){
+      if((myHead.x - 1 == snakeHead.x && myHead.y+ 1 == snakeHead.y ) || (myHead.x - 1 == snakeHead.x && myHead.y - 1 == snakeHead.y) || (myHead.x- 2  == snakeHead.x  && myHead.y == snakeHead.y)){
         isMoveSafe.left = false;
         console.log("test4");
       }
