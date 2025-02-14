@@ -54,6 +54,9 @@ function move(gameState) {
   const myHead = gameState.you.body[0];
   const boardWidth = gameState.board.width;
   const boardHeight = gameState.board.height;
+  
+  // You
+  let myBody = gameState.you.body;
 
   // Prevent your Battlesnake from moving out of bounds
    if(myHead.x == 0){
@@ -86,6 +89,33 @@ function move(gameState) {
       }
     }
   }
+
+  
+  // Avoid head on collisions with other snakes
+  // EDIT for usability
+  for(let i = 0; i < opponents.length; i++){
+    let snake = opponents[i].body;
+    let snakeHead = snake[0];
+    if(snake.length >= myBody.length){
+      if((myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x  && myHead.y == snakeHead.y + 2)){
+        isMoveSafe.up = false;
+        console.log("test1");
+      }
+      if((myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x  && myHead.y == snakeHead.y - 2)){
+        isMoveSafe.down = false;
+        console.log("test2");
+      }
+      if((myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x + 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x + 2  && myHead.y == snakeHead.y)){
+        isMoveSafe.right = false;
+        console.log("test3");
+      }
+      if((myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y + 1) || (myHead.x == snakeHead.x - 1 && myHead.y == snakeHead.y - 1) || (myHead.x == snakeHead.x - 2  && myHead.y == snakeHead.y)){
+        isMoveSafe.left = false;
+        console.log("test4");
+      }
+    }
+  }
+  
 
   // Are there any safe moves left?
   const safeMoves = Object.keys(isMoveSafe).filter(key => isMoveSafe[key]);
