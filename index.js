@@ -10,6 +10,7 @@
 // To get you started we've included code to prevent your Battlesnake from moving backwards.
 // For more info see docs.battlesnake.com
 
+import e from 'express';
 import runServer from './server.js';
 
 // info is called when you create your Battlesnake on play.battlesnake.com
@@ -67,11 +68,34 @@ function move(gameState) {
   }
 
   // TODO: Step 1 - Prevent your Battlesnake from moving out of bounds
-  // boardWidth = gameState.board.width;
-  // boardHeight = gameState.board.height;
+   const boardWidth = gameState.board.width;
+   const boardHeight = gameState.board.height;
+   if(myHead.x == 0){
+    isMoveSafe.left = false;
+
+   } else if (myHead.x == boardWidth) {
+    isMoveSafe.right = false;
+
+  } else if (myHead.y == 0) {
+    isMoveSafe.down = false;
+
+  } else if (myHead.y == boardHeight) {
+    isMoveSafe.up = false;
+  }
 
   // TODO: Step 2 - Prevent your Battlesnake from colliding with itself
-  // myBody = gameState.you.body;
+  myBody = gameState.you.body;
+  for(let i = 0; i < gameState.you.body.length(); i++){
+    if(myHead.x + 1 == gameState.you.body[i].x){
+      isMoveSafe.right = false;
+    } else if(myHead.x - 1 == gameState.you.body[i].x){
+      isMoveSafe.left = false;
+    } else if(myHead.y + 1 == gameState.you.body[i].y){
+      isMoveSafe.up = false;
+    } else if(myHead.y - 1 == gameState.you.body[i].y){
+      isMoveSafe.down = false;
+    }
+  }
 
   // TODO: Step 3 - Prevent your Battlesnake from colliding with other Battlesnakes
   // opponents = gameState.board.snakes;
